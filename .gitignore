@@ -1,0 +1,39 @@
+# ── Secrets (NEVER commit these) ─────────────────────────────
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+*.env
+!.env.example
+
+# ── Wrangler ──────────────────────────────────────────────────
+.wrangler/
+wrangler-debug.log
+
+# ── Node ──────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ── TypeScript ────────────────────────────────────────────────
+dist/
+build/
+*.tsbuildinfo
+*.js.map
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~

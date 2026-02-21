@@ -1,0 +1,79 @@
+# ============================================================
+# Wrangler Configuration for Delivery API
+# ============================================================
+
+name = "delivery-api"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# TypeScript is compiled automatically by Wrangler
+
+# ── KV Namespaces ─────────────────────────────────────────────
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "REPLACE_WITH_YOUR_SESSIONS_KV_ID"
+preview_id = "REPLACE_WITH_YOUR_SESSIONS_KV_PREVIEW_ID"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_YOUR_RATE_LIMIT_KV_ID"
+preview_id = "REPLACE_WITH_YOUR_RATE_LIMIT_KV_PREVIEW_ID"
+
+# ── D1 Database ───────────────────────────────────────────────
+
+[[d1_databases]]
+binding = "DB"
+database_name = "delivery-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# ── Durable Objects ───────────────────────────────────────────
+
+[[durable_objects.bindings]]
+name = "DRIVER_TRACKER"
+class_name = "DriverTracker"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["DriverTracker"]
+
+# ── Secrets (set via `wrangler secret put JWT_SECRET`) ────────
+# Do NOT put actual values here. Use:
+#   wrangler secret put JWT_SECRET
+#   wrangler secret put ENVIRONMENT
+
+# ── Environment Variables ─────────────────────────────────────
+
+[vars]
+ENVIRONMENT = "production"
+
+# ── Development overrides ─────────────────────────────────────
+
+[env.dev]
+name = "delivery-api-dev"
+
+[env.dev.vars]
+ENVIRONMENT = "development"
+
+[[env.dev.kv_namespaces]]
+binding = "SESSIONS"
+id = "REPLACE_WITH_DEV_SESSIONS_KV_ID"
+
+[[env.dev.kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_DEV_RATE_LIMIT_KV_ID"
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "delivery-db-dev"
+database_id = "REPLACE_WITH_DEV_D1_DATABASE_ID"
+
+[[env.dev.durable_objects.bindings]]
+name = "DRIVER_TRACKER"
+class_name = "DriverTracker"
+
+[[env.dev.migrations]]
+tag = "v1"
+new_classes = ["DriverTracker"]

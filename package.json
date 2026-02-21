@@ -1,0 +1,25 @@
+{
+  "name": "delivery-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev --env dev",
+    "deploy": "wrangler deploy",
+    "deploy:dev": "wrangler deploy --env dev",
+    "db:migrate": "wrangler d1 migrations apply delivery-db --env dev",
+    "db:migrate:prod": "wrangler d1 migrations apply delivery-db",
+    "db:create": "wrangler d1 create delivery-db",
+    "kv:create:sessions": "wrangler kv:namespace create SESSIONS",
+    "kv:create:ratelimit": "wrangler kv:namespace create RATE_LIMIT",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.4.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250430.0",
+    "typescript": "^5.5.4",
+    "wrangler": "^4.67.0"
+  }
+}
